@@ -7,13 +7,17 @@ services:
     build: ./mongo
     environment:
       - MONGO_DATA_DIR=/data/db
+      - MONGO_INITDB_DATABASE=admin
     volumes:
       - ~/data/db:/data/db
     ports:
       - 27017:27017
+    hostname: mongodb
   app:
     image: admin
     container_name: "admin"
     build: ./admin
+    environment: 
+      - DBHOST=localhost
     ports:
       - 9000:9000
